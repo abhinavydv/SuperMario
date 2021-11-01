@@ -1,0 +1,127 @@
+{
+    "Mario": {
+        "class": "widgets.mario.Mario",
+        "relative_height": 0.06,
+        "relative_width": 0.04,
+        "relative_position": [0, 0],
+        "relative_velocity": [0, 0],
+        "max_relative_velocity": [0.2, 0.6]
+    },
+    "Ground": {
+        "class": "widgets.objects.Ground",
+        "relative_height": 0.1,
+        "relative_width": 0.12,
+        "relative_position": [0, 0]
+    },
+    "OrangeBrick": {
+        "class": "widgets.objects.OrangeBrick",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0]
+    },
+    "QuestionBlock": {
+        "class": "widgets.objects.QuestionBlock",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0]
+    },
+    "PipeHead": {
+        "class": "widgets.objects.PipeHead",
+        "relative_height": 0.02,
+        "relative_width": 0.024,
+        "relative_position": [0, 0]
+    },
+    "PipeBody": {
+        "class": "widgets.objects.PipeBody",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0]
+    },
+    "Pipe": {
+        "class": "widgets.objects.Pipe",
+        "relative_height": 0.15,
+        "relative_width": 0.1,
+        "relative_position": [0, 0]
+    },
+    "Goomba": {
+        "class": "widgets.walker.Goomba",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.1, 0]
+    },
+    "FlyGoomba" : {
+        "class": "widgets.jumper.FlyGoomba",
+        "relative_height": 0.07,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.1, 0],
+        "max_relative_velocity": [0.1, 0.4]
+    },
+    "Koopa" : {
+        "class": "widgets.walker.Koopa",
+        "relative_height": 0.07,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.1, 0]
+    },
+    "Piranha" : {
+        "class": "widgets.periodic.Piranha",
+        "relative_height": 0.07,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0, 0.1],
+        "max_relative_velocity": [0, 0.1]
+    },
+    "Mushroom" : {
+        "class": "widgets.collectibles.Mushroom",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.1, 0],
+        "max_relative_velocity": [0.1, 0.24]
+    },
+    "PowerStar" : {
+        "class": "widgets.collectibles.Star",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.1, 0],
+        "max_relative_velocity": [0.1, 0.4]
+    },
+    "FireFlower": {
+        "class": "widgets.collectibles.FireFlower",
+        "relative_height": 0.05,
+        "relative_width": 0.05,
+        "relative_position": [0, 0],
+        "max_relative_velocity": [0.1, 0.4]
+    },
+    "Coin": {
+        "class": "widgets.collectibles.Coin",
+        "relative_height": 0.03,
+        "relative_width": 0.03,
+        "relative_position": [0, 0],
+        "relative_velocity": [0, 0.6],
+        "max_relative_velocity": [0.1, 0.6]
+    },
+    "FireBall": {
+        "class": "widgets.abstract.FireBall",
+        "relative_height": 0.025,
+        "relative_width": 0.025,
+        "relative_position": [0, 0],
+        "relative_velocity": [0.35, 0],
+        "max_relative_velocity": [0.35, 0.45]
+    },
+    "Castle": {
+        "class": "widgets.objects.Castle",
+        "relative_height": 0.9,
+        "relative_width": 0.9,
+        "relative_position": [0, 0]
+    },
+    "Flag": {
+        "class": "widgets.objects.Flag",
+        "relative_height": 0.9,
+        "relative_width": 0.9,
+        "relative_position": [0, 0]
+    }
+}

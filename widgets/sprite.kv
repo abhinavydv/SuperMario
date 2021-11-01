@@ -1,0 +1,17 @@
+#:import Window kivy.core.window.Window
+
+<Sprite>:
+    size_hint: None, None
+    position: [(root.relative_position[0]-root.relative_screen_position[0]) * Window.height, (root.relative_position[1]-root.relative_screen_position[1]) * Window.height]
+    center_x2: root.position[0] + root.width/2
+    center_y2: root.position[1] + root.height/2
+    size: [root.relative_width * Window.height, root.relative_height * Window.height]
+    pos: root.position
+    canvas:
+        Rectangle:
+            size: root.size
+            pos: root.pos
+            source: root.image
+
+# <StaticSprite>:
+#     pos: root.position

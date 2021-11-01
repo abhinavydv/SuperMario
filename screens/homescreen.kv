@@ -1,0 +1,46 @@
+#:import Window kivy.core.window.Window
+
+<TransparentButton@Button>:
+    background_color: tuple(list(self.background_color)[0:3] + [.5])
+
+<HomeScreen>:
+    name: "HomeScreen"
+    FloatLayout:
+        Image:
+            source: "assets/menu/marioPic.png"
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+
+                TransparentButton:
+                    text: "Play"
+                    on_release:
+                        root.play(self)
+
+                TransparentButton:
+                    text: "Load Game"
+                    on_release:
+                        root.load_game(self)
+
+                TransparentButton:
+                    text: "Levels"
+                    on_release:
+                        root.levels(self)
+
+                TransparentButton:
+                    text: "Settings"
+                    on_release:
+                        root.settings(self)
+
+                Label:
+
+            Label:
+
+            
