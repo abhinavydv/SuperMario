@@ -14,6 +14,8 @@ from kivy.properties import NumericProperty, StringProperty, ListProperty
 from kivy.lang import Builder
 from kivy.core.window import Window
 
+from PIL import Image
+
 
 Builder.load_file("widgets/sprite.kv")
 
@@ -348,7 +350,7 @@ class DynamicSprite(Sprite):
         self.relative_velocity = [0, 0]
         self.max_relative_velocity = [0, 0]
         self.moving = False
-        self.direction = "right"
+        self.direction = "Right"
         self.use_gravity = True
 
     def update(self, levelscreen, dt):
@@ -356,6 +358,7 @@ class DynamicSprite(Sprite):
         Overriden method of widgets.sprite.Sprite Class
         """
         self.move(levelscreen, dt)
+        self.animate(levelscreen, dt)
 
     def if_collides(self, sprite):
         if not sprite.is_static and sprite.tag != "powerup":
@@ -375,7 +378,7 @@ class DynamicSprite(Sprite):
         """
 
         if self.top < 0:
-            self.clean_up()
+            self.die()
 
     def detect_collisions(self, sprite_list: list):
         """

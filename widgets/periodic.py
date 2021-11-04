@@ -39,12 +39,25 @@ class Piranha(Periodic):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/baddies/Piranha_1.png"
+        self.image = "assets/images/baddies/Piranha_1.png"
         self.pipe = None
         self.t = time()
         self.waiting = False
         self.wait_duration = 0.4
         self.mario_wait_duration = 2
+
+        self.animate_time = 0
+        self.i = 1
+
+    def animate(self, levelscreen, dt):
+        self.animate_time += dt
+        if self.animate_time >= 0.5:
+            self.animate_time = 0
+            self.i += 1
+            if self.i > 2:
+                self.i = 1
+            
+            self.image = f"assets/images/baddies/Piranha_{self.i}.png"
 
     def check_extreme(self):
         if self.pipe is not None:
@@ -93,4 +106,14 @@ class Piranha(Periodic):
             return True
 
         return False
+
+    def on_collide(self, other, col):
+        if other.tag == "mario":
+            self.mario_collided(other, col)
+
+    def mario_collided(self, mario, col):
+        if mario.is_invincible:
+            self.die()
+        else:
+            mario.die()
         

@@ -39,9 +39,14 @@
     "10": {
         "name": "QuestionBlock",
         "relative_position": [0.65, 0.24],
-        "content": "FireFlower"
+        "content": "Mushroom"
     },
     "11": {
+        "name": "QuestionBlock",
+        "relative_position": [0.35, 0.24],
+        "content": "PowerStar"
+    },
+    "12": {
         "name": "Pipe",
         "relative_position": [0.8, 0.1],
         "has_piranha": true

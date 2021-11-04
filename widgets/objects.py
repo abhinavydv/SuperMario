@@ -13,7 +13,7 @@ class Ground(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/tiles/groundgreen.png"
+        self.image = "assets/images/tiles/groundgreen.png"
 
 
 class PipeHead(StaticSprite):
@@ -21,7 +21,7 @@ class PipeHead(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/tiles/pipe_head_green.png"
+        self.image = "assets/images/tiles/pipe_head_green.png"
 
 
 class PipeBody(StaticSprite):
@@ -29,7 +29,7 @@ class PipeBody(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/tiles/pipe_body_green.png"
+        self.image = "assets/images/tiles/pipe_body_green.png"
 
 
 class Pipe(Collection):
@@ -39,31 +39,11 @@ class Pipe(Collection):
     
     def __init__(self):
         super().__init__()
-
-        head = PipeHead()
-        body = PipeBody()
-        self.sprites["head"] = head
-        self.sprites["body"] = body
         self.hidden_level = None  # None: There is no hidden level
                                   # HiddenLevel{No} (str): The number of hidden level
         self.has_piranha = None   # The piranha like plant that comes out of pipe
 
     def get_added_to_screen(self, levelscreen):
-        self.sprites["head"].relative_width = self.relative_width
-        self.sprites["head"].relative_height = self.relative_width / 2
-        self.sprites["head"].relative_position = list(self.relative_position)
-        self.sprites["head"].relative_position[1] += self.relative_height - \
-            self.sprites["head"].relative_height
-
-        self.sprites["body"].relative_width = self.relative_width * 5/6
-        self.sprites["body"].relative_height = self.relative_height - \
-            self.sprites["head"].relative_height
-        self.sprites["body"].relative_position = list(self.relative_position)
-        self.sprites["body"].relative_position[0] += (self.relative_width - 
-            self.sprites["body"].relative_width)/2
-
-        levelscreen.update_list.append(self)
-        
         if self.has_piranha:
             piranha = Piranha()
             self.sprites["piranha"] = piranha
@@ -78,6 +58,26 @@ class Pipe(Collection):
             piranha.relative_velocity = list(levelscreen.sprites["Piranha"]["relative_velocity"])
             piranha.max_relative_velocity = list(levelscreen.sprites["Piranha"]["max_relative_velocity"])
 
+        head = PipeHead()
+        body = PipeBody()
+        self.sprites["head"] = head
+        self.sprites["body"] = body
+
+        self.sprites["head"].relative_width = self.relative_width
+        self.sprites["head"].relative_height = self.relative_width / 2
+        self.sprites["head"].relative_position = list(self.relative_position)
+        self.sprites["head"].relative_position[1] += self.relative_height - \
+            self.sprites["head"].relative_height
+
+        self.sprites["body"].relative_width = self.relative_width * 5/6
+        self.sprites["body"].relative_height = self.relative_height - \
+            self.sprites["head"].relative_height
+        self.sprites["body"].relative_position = list(self.relative_position)
+        self.sprites["body"].relative_position[0] += (self.relative_width - 
+            self.sprites["body"].relative_width)/2
+
+        levelscreen.update_list.append(self)
+
         super().get_added_to_screen(levelscreen)
 
     def update(self, levelscreen, dt):
@@ -89,7 +89,7 @@ class OrangeBrick(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/tiles/brick_orange_1.png"
+        self.image = "assets/images/tiles/brick_orange_1.png"
 
 
 class QuestionBlock(StaticSprite):
@@ -97,7 +97,7 @@ class QuestionBlock(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/Question_Block_0.png"
+        self.image = "assets/images/items/Question_Block_0.png"
         self.content = "Coin"  # Coin, Mushroom, Fireflower or Star
         self.is_dead = False
 
@@ -110,7 +110,7 @@ class QuestionBlock(StaticSprite):
 
     def activate(self):
         levelscreen = self.parent.parent
-        self.image = "assets/items/Question_Block_Dead.png"
+        self.image = "assets/images/items/Question_Block_Dead.png"
 
         # Blow away the dynamic sprite that is present above the block
         for sprite in levelscreen.dynamic_sprites:
@@ -118,6 +118,13 @@ class QuestionBlock(StaticSprite):
                 and self.x < sprite.right\
                     and -3 < sprite.y-self.top < 4:
                 sprite.get_blown()
+
+        # If the hidden item is mushroom and mario is small then
+        # leave the hidden item as mushroom. But if mario is big, convert 
+        # hidden item to FireFlower
+        if self.content == "Mushroom":
+            if not levelscreen.mario.small:
+                self.content = "FireFlower"
 
         # Show the hidden item
         content = levelscreen.sprites[self.content]
@@ -143,7 +150,7 @@ class Castle(StaticSprite):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/Castle.png"
+        self.image = "assets/images/items/Castle.png"
 
 
 class Flag(StaticSprite):

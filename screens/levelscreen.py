@@ -49,6 +49,8 @@ class LevelScreen(Screen, SpriteAdder):
         self.update_list = []
         # self.start_position = [0, 0]
 
+        self.images = {}
+
     def load(self, level):
         """
         level: The level no. to load
@@ -117,10 +119,33 @@ class LevelScreen(Screen, SpriteAdder):
 
         import json
         f = open(f"{level}")
-        leve_data = json.load(f)
-        self.add_all(leve_data)
+        level_data = json.load(f)
+        self.add_all(level_data)
         # print(self.dynamic_sprites)
         # print(self.static_sprites)
+
+        self.load_images()
+
+    def load_images(self, path="assets/images"):
+        """
+        This method's name is a bit misguiding.
+        The images are to be loaded only for their sizes.
+        The dictionary self.images will be updated with the sizes.
+        """
+
+        import os
+        from PIL import Image
+        images_path = os.listdir(path)
+        img_formats = ["png", "jpg", "jpeg", "gif"]
+
+        for i in images_path:
+            real_path = os.path.realpath(path + "/" + i)
+            if os.path.isdir(real_path):
+                self.load_images(path+"/"+i)
+            else:
+                if i.split(".")[-1] not in img_formats:
+                    continue
+                self.images[path+"/"+i] = Image.open(path+"/"+i).size
 
     def exit(self, btn):
         """
@@ -214,8 +239,7 @@ class LevelScreen(Screen, SpriteAdder):
 
         try:
             for sprite in self.dynamic_sprites + self.update_list:
-                if sprite.parent is not None:
-                    sprite.update(self, dt)
+                sprite.update(self, dt)
         except Exception as e:
             print(e)
             import traceback

@@ -11,7 +11,7 @@ class FireBall(Jumper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/Fire_Ball_2.png"
+        self.image = "assets/images/items/Fire_Ball_2.png"
         self.is_abstract = True
         self.relative_velocity = [0, 0]
 

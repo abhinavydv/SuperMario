@@ -24,10 +24,8 @@ class Collectible(object):
             self.interval.cancel()
             if self.is_static:
                 block.parent.parent.static_sprites.append(self)
-                print(1)
             else:
                 block.parent.parent.dynamic_sprites.append(self)
-                print(2)
 
 
 class Mushroom(Walker, Collectible):
@@ -38,7 +36,7 @@ class Mushroom(Walker, Collectible):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/Mushroom.png"
+        self.image = "assets/images/items/Mushroom.png"
         self.tag = "powerup"
 
     def mario_collided(self, mario, col):
@@ -54,7 +52,7 @@ class FireFlower(StaticSprite, Collectible):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/Fire_Flower.png"
+        self.image = "assets/images/items/Fire_Flower.png"
         self.tag = "powerup"
 
     def on_collide(self, other, col):
@@ -69,7 +67,7 @@ class PowerStar(Jumper, Collectible):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/items/StarPower.png"
+        self.image = "assets/images/items/StarPower.png"
         self.tag = "powerup"
 
     def mario_collided(self, mario, col):
@@ -82,14 +80,14 @@ class Coin(DynamicSprite, Collectible):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.images = ["assets/items/Coin_1.png",
-                        "assets/items/Coin_2.png",
-                        "assets/items/Coin_3.png",
-                        "assets/items/Coin_4.png",
-                        "assets/items/Coin_5.png",
-                        "assets/items/Coin_6.png",
-                        "assets/items/Coin_7.png",
-                        "assets/items/Coin_8.png",
+        self.images = ["assets/images/items/Coin_1.png",
+                        "assets/images/items/Coin_2.png",
+                        "assets/images/items/Coin_3.png",
+                        "assets/images/items/Coin_4.png",
+                        "assets/images/items/Coin_5.png",
+                        "assets/images/items/Coin_6.png",
+                        "assets/images/items/Coin_7.png",
+                        "assets/images/items/Coin_8.png",
         ]
         self.i = 0
         self.collider = False
