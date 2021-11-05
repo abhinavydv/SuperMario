@@ -183,7 +183,7 @@ class Koopa(Walker):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/images/baddies/koopa_green_right_1.png"
+        self.image = "assets/images/baddies/Koopa_Green_Right_1.png"
         
         self.i = 1
         self.animate_time = 0
@@ -248,14 +248,18 @@ class Koopa(Walker):
 
     def on_collide(self, other, col):
         if not other.is_static and self.in_shell and self.relative_velocity[0] != 0:
-            other.get_blown()
+            if other.tag == "mario" and other.is_invincible:
+                self.get_blown()
+            else:
+                other.get_blown()
             return
         super().on_collide(other, col)
 
     def get_blown(self):
         self.dead = True
         self.animate_time = 0
-        self.relative_width *= 0.8
+        if not self.in_shell:
+            self.relative_width *= 0.8
         self.relative_height = self.relative_width
         self.image = "assets/images/baddies/Shell_Green_Flip.png"
         self.relative_velocity[0] = 0

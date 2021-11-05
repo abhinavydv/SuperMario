@@ -25,7 +25,7 @@ class FlyGoomba(Goomba, Jumper):
         self.animate_time = 0
 
     def animate(self, levelscreen, dt):
-        if self.jumping:
+        if self.jumping and not self.dead:
             self.animate_time += dt
             if self.animate_time >= 0.25:
                 self.animate_time = 0
@@ -41,7 +41,8 @@ class FlyGoomba(Goomba, Jumper):
     def die(self):
         if self.jumping:
             self.jumping = False
-            self.relative_height = self.relative_width
+            levelscreen = self.parent.parent
+            self.relative_height = levelscreen.sprites["Goomba"]["relative_height"]
         else:
             super().die()
         

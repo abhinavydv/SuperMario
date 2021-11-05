@@ -47,6 +47,7 @@ class SpriteAdder(object):
         try:
             sprite.get_added_to_screen(self)
         except TypeError as e:
+            import traceback
             print(e)
             traceback.print_exc()
 

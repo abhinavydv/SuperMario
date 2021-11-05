@@ -3,17 +3,77 @@ All the static objects like the ground, bricks and others will be defined here.
 """
 
 
-from operator import le
 from widgets.periodic import Piranha
 from widgets.sprite import StaticSprite, Collection
 
 
-class Ground(StaticSprite):
+class GroundCenter(StaticSprite):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.image = "assets/images/tiles/groundgreen.png"
+        self.image = "assets/images/tiles/Ground_Green_Center.png"
+
+
+class GroundLeft(StaticSprite):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.image = "assets/images/tiles/Ground_Green_Left.png"
+
+
+class GroundRight(StaticSprite):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.image = "assets/images/tiles/Ground_Green_Right.png"
+
+
+# class Ground(StaticSprite):
+
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+
+#         self.image = "assets/images/tiles/groundgreen.png"
+
+
+class Ground(Collection):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def get_added_to_screen(self, levelscreen):
+
+        # GroundLeft
+        left = GroundLeft()
+        self.sprites["GroundLeft"] = left
+        left.relative_height = self.relative_height
+        left.relative_position = self.relative_position
+        width, height = levelscreen.images[left.image]
+        left.relative_width = left.relative_height * width / height
+
+        # GroundCenter
+        width, height = levelscreen.images["assets/images/tiles/Ground_Green_Center.png"]
+        num_centers = int((self.relative_width - left.relative_width) / (self.relative_height * width / height))
+        print(num_centers)
+        for i in range(num_centers):
+            center = GroundCenter()
+            self.sprites[f"GroundCenter{i}"] = center
+            center.relative_height = self.relative_height
+            center.relative_width = center.relative_height * width / height
+            center.relative_position[1] = self.relative_position[1]
+            center.relative_position[0] = self.relative_position[0] + left.relative_width + i * center.relative_width
+
+        # GroundRight
+        right = GroundRight()
+        self.sprites["GroundRight"] = right
+        width, height = levelscreen.images[right.image]
+        right.relative_width = right.relative_height * width / height
+        right.relative_position[0] = self.relative_position[0] + self.relative_width - right.relative_width
+
+        super().get_added_to_screen(levelscreen)
 
 
 class PipeHead(StaticSprite):
@@ -62,6 +122,7 @@ class Pipe(Collection):
         body = PipeBody()
         self.sprites["head"] = head
         self.sprites["body"] = body
+        head.width_fixed = body.width_fixed = True
 
         self.sprites["head"].relative_width = self.relative_width
         self.sprites["head"].relative_height = self.relative_width / 2

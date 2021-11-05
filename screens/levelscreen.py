@@ -117,14 +117,14 @@ class LevelScreen(Screen, SpriteAdder):
 
         self.level = level
 
+        self.load_images()
+
         import json
         f = open(f"{level}")
         level_data = json.load(f)
         self.add_all(level_data)
         # print(self.dynamic_sprites)
         # print(self.static_sprites)
-
-        self.load_images()
 
     def load_images(self, path="assets/images"):
         """

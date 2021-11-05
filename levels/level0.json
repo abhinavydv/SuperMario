@@ -8,11 +8,11 @@
         "relative_width": 2
     },
     "3":{
-        "name": "Ground",
+        "name": "Pipe",
         "relative_position": [0, 0.1]
     },
     "4":{
-        "name": "Ground",
+        "name": "Pipe",
         "relative_position": [1.8, 0.1]
     },
     "5": {

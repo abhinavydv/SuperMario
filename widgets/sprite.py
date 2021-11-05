@@ -55,6 +55,7 @@ class Sprite(Widget):
         self.is_abstract = False
         self.is_fireproof = False
         self.type = "Sprite"
+        self.width_fixed = False
 
     def update(self, levelscreen, dt):
         """
@@ -219,6 +220,9 @@ class Sprite(Widget):
                 setattr(self, i, data[i])
 
     def get_added_to_screen(self, levelscreen):
+        if not self.width_fixed:
+            width, height = levelscreen.images[self.image]
+            self.relative_width = self.relative_height * width / height
         levelscreen.mainlayout.add_widget(self)
 
 
@@ -234,13 +238,15 @@ class Collection(Sprite):
     def get_added_to_screen(self, levelscreen):
         self.levelscreen = levelscreen
         for i in self.sprites:
-            sprite = self.sprites[i]
+            # sprite = self.sprites[i]
 
-            levelscreen.mainlayout.add_widget(sprite)
-            if sprite.is_static:
-                levelscreen.static_sprites.append(sprite)
-            else:
-                levelscreen.dynamic_sprites.append(sprite)
+            # levelscreen.mainlayout.add_widget(sprite)
+            # if sprite.is_static:
+            #     levelscreen.static_sprites.append(sprite)
+            # else:
+            #     levelscreen.dynamic_sprites.append(sprite)
+
+            self.sprites[i].get_added_to_screen(levelscreen)
 
     def update(self, levelscreen, dt):
         """
