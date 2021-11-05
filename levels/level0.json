@@ -47,6 +47,11 @@
         "content": "PowerStar"
     },
     "12": {
+        "name": "QuestionBlock",
+        "relative_position": [1, 0.24],
+        "content": "Coin"
+    },
+    "13": {
         "name": "Pipe",
         "relative_position": [0.8, 0.1],
         "has_piranha": true

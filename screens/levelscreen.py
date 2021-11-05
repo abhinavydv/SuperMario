@@ -123,6 +123,10 @@ class LevelScreen(Screen, SpriteAdder):
         f = open(f"{level}")
         level_data = json.load(f)
         self.add_all(level_data)
+
+        from utils.controls import AndroidControls
+        self.controls = AndroidControls()
+        self.controls.turn_on(self.mario, self)
         # print(self.dynamic_sprites)
         # print(self.static_sprites)
 
@@ -236,6 +240,9 @@ class LevelScreen(Screen, SpriteAdder):
         """
         # for i in self.static_sprites:
         #     i.update(self, dt)
+
+        if dt > 0.1:
+            return
 
         try:
             for sprite in self.dynamic_sprites + self.update_list:

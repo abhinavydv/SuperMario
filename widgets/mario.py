@@ -161,16 +161,10 @@ class Mario(Walker):
         if self.dying:
             return
         if keycode == 79:  # Right Arrow key
-            self.relative_velocity[0] = self.max_relative_velocity[0]
-            self.direction = "_Right"
-            if self.state != "_Jump":
-                self.state = "_Walk"
+            self.right_down()
 
         elif keycode == 80:  # Left Arrow key
-            self.relative_velocity[0] = -self.max_relative_velocity[0]
-            self.direction = "_Left"
-            if self.state != "_Jump":
-                self.state = "_Walk"
+            self.left_down()
 
         # elif keycode == 81:  # Down Arrow Key
         #     self.sit()
@@ -180,16 +174,35 @@ class Mario(Walker):
         #         self.stand()
 
         elif keycode == 44:  # Space Bar
-            self.jumping = True
+            self.space_down()
 
         elif keycode == 40:  # Enter Key
-            self.fireball()
+            self.enter_down()
+
+    def right_down(self):
+        self.relative_velocity[0] = self.max_relative_velocity[0]
+        self.direction = "_Right"
+        if self.state != "_Jump":
+            self.state = "_Walk"
+
+    def left_down(self):
+        self.relative_velocity[0] = -self.max_relative_velocity[0]
+        self.direction = "_Left"
+        if self.state != "_Jump":
+            self.state = "_Walk"
+
+    def space_down(self):
+        self.jumping = True
+
+    def enter_down(self):
+        self.fireball()
 
     def on_key_up(self, keyboard, keycode):
-        if keycode == 79 or keycode == 80:  # Right and left Arrow keys respectively
-            self.relative_velocity[0] = 0
-            if self.state != "_Jump":
-                self.state = "_Still"
+        if keycode == 79:  # Right Arrow key
+            self.right_up()
+
+        if keycode == 80:  # Left Arrow key
+            self.left_up()
 
         # if keycode == 81:   # Down Arrow key
         #     if self.state != "_Jump":
@@ -197,7 +210,18 @@ class Mario(Walker):
         #         self.standing = True
 
         if keycode == 44:  # Space bar
-            self.jumping = False
+            self.space_up()
+
+    def right_up(self):
+        self.relative_velocity[0] = 0
+        if self.state != "_Jump":
+            self.state = "_Still"
+
+    def left_up(self):
+        self.right_up()
+
+    def space_up(self):
+        self.jumping = False
 
     def die(self):
         if self.dying:
