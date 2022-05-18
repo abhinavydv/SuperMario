@@ -4,7 +4,8 @@ All the static objects like the ground, bricks and others will be defined here.
 
 
 from widgets.periodic import Piranha
-from widgets.sprite import StaticSprite, Collection
+from widgets.sprite import DynamicSprite, StaticSprite, Collection
+from kivy.clock import Clock
 
 
 class GroundCenter(StaticSprite):
@@ -57,7 +58,7 @@ class Ground(Collection):
         # GroundCenter
         width, height = levelscreen.images["assets/images/tiles/Ground_Green_Center.png"]
         num_centers = int((self.relative_width - left.relative_width) / (self.relative_height * width / height))
-        print(num_centers)
+
         for i in range(num_centers):
             center = GroundCenter()
             self.sprites[f"GroundCenter{i}"] = center
@@ -69,9 +70,12 @@ class Ground(Collection):
         # GroundRight
         right = GroundRight()
         self.sprites["GroundRight"] = right
+        right.relative_position[1] = self.relative_position[1]
+        right.relative_height = self.relative_height
         width, height = levelscreen.images[right.image]
         right.relative_width = right.relative_height * width / height
         right.relative_position[0] = self.relative_position[0] + self.relative_width - right.relative_width
+        # right.relative_position[0] = self.relative_position[0] + self.relative_width 
 
         super().get_added_to_screen(levelscreen)
 
@@ -145,12 +149,64 @@ class Pipe(Collection):
         pass
 
 
+class BrokenOrangeBrick(DynamicSprite):
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.collider = False
+        self.image = "assets/images/tiles/brick_orange_1.png"
+        self.max_time = 2
+        self.elapsed = 0
+
+        from kivy.app import App
+        self.app = App.get_running_app()
+
+    def move(self, levelscreen, dt):
+        self.elapsed += dt
+        if self.elapsed > self.max_time:
+            self.clean_up()
+        self.relative_position[0] += self.relative_velocity[0] * dt
+        self.relative_position[1] += self.relative_velocity[1] * dt
+        self.relative_velocity[1] += self.app.settings["physics"]["gravity"] * dt
+
+
 class OrangeBrick(StaticSprite):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.image = "assets/images/tiles/brick_orange_1.png"
+
+    def on_collide(self, other: object, col):
+        super().on_collide(other, col)
+
+        if other.tag == "mario":
+            if col[2] == "bottom":
+                if other.small:
+                    self.relative_position[1]+=0.01
+                    Clock.schedule_once(lambda dt: self.fix_position(), 0.1)
+                else:
+                    self.breaks()
+
+    def fix_position(self):
+        self.relative_position[1] -= 0.01
+
+    def breaks(self):
+        from math import sin, cos, pi
+        # self.clean_up()
+        for i in range(4):
+            particle = BrokenOrangeBrick()
+            particle.relative_height = self.relative_height/2
+            particle.relative_width = self.relative_width/2
+            particle.relative_position = [self.relative_position[0] + particle.relative_width*(i//2),
+                                        self.relative_position[1] + particle.relative_height*(i%2)]
+
+            angle = (135-30*i)*pi/180
+            particle.relative_velocity = [0.5*cos(angle), 0.5*sin(angle)]
+            particle.relative_screen_position = self.relative_screen_position
+            particle.get_added_to_screen(self.parent.parent)
+        self.clean_up()
 
 
 class QuestionBlock(StaticSprite):
@@ -175,6 +231,9 @@ class QuestionBlock(StaticSprite):
 
         # Blow away the dynamic sprite that is present above the block
         for sprite in levelscreen.dynamic_sprites:
+            if sprite.tag == "powerup":
+                sprite.relative_velocity[1] = 0.1
+                continue
             if sprite.x < self.right\
                 and self.x < sprite.right\
                     and -3 < sprite.y-self.top < 4:

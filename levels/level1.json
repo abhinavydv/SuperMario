@@ -1,0 +1,119 @@
+{
+    "1": {
+        "name": "Mario",
+        "relative_position": [0.1, 0.1]
+    },
+    "2": {
+        "name": "Ground",
+        "relative_width": 2.6
+    },
+    "3": {
+        "name": "OrangeBrick",
+        "relative_position": [0.3, 0.25]
+    },
+    "4": {
+        "name": "QuestionBlock",
+        "relative_position": [0.35, 0.25],
+        "content": "Mushroom"
+    },
+    "5": {
+        "name": "OrangeBrick",
+        "relative_position": [0.4, 0.25]
+    },
+    "6": {
+        "name": "QuestionBlock",
+        "relative_position": [0.45, 0.25],
+        "content": "Mushroom"
+    },
+    "7": {
+        "name": "OrangeBrick",
+        "relative_position": [0.5, 0.25]
+    },
+    "8": {
+        "name": "Pipe",
+        "relative_position": [1, 0.1]
+    },
+    "9": {
+        "name": "Goomba",
+        "relative_position": [1, 0.25],
+        "relative_velocity": [-0.1, 0]
+    },
+    "10": {
+        "name": "Goomba",
+        "relative_position": [1.09, 0.25],
+        "relative_velocity": [-0.1, 0]
+    },
+    "11": {
+        "name": "QuestionBlock",
+        "relative_position": [1.5, 0.25]
+    },
+    "12": {
+        "name": "QuestionBlock",
+        "relative_position": [1.9, 0.25]
+    },
+    "13": {
+        "name": "Koopa",
+        "relative_position": [1.4, 0.1],
+        "relative_velocity": [-0.1, 0],
+        "direction": "Left"
+    },
+    "14": {
+        "name": "OrangeBrick",
+        "relative_position": [2.4, 0.1]
+    },
+    "15": {
+        "name": "OrangeBrick",
+        "relative_position": [2.45, 0.1]
+    },
+    "16": {
+        "name": "OrangeBrick",
+        "relative_position": [2.5, 0.1]
+    },
+    "17": {
+        "name": "OrangeBrick",
+        "relative_position": [2.55, 0.1]
+    },
+    "18": {
+        "name": "OrangeBrick",
+        "relative_position": [2.45, 0.15]
+    },
+    "19": {
+        "name": "OrangeBrick",
+        "relative_position": [2.5, 0.15]
+    },
+    "20": {
+        "name": "OrangeBrick",
+        "relative_position": [2.55, 0.15]
+    },
+    "21": {
+        "name": "OrangeBrick",
+        "relative_position": [2.5, 0.2]
+    },
+    "22": {
+        "name": "OrangeBrick",
+        "relative_position": [2.55, 0.2]
+    },
+    "23": {
+        "name": "OrangeBrick",
+        "relative_position": [2.55, 0.25]
+    },
+    "24": {
+        "name": "Ground",
+        "relative_position": [2.9, 0],
+        "relative_width": 0.9
+    },
+    "25": {
+        "name": "Goomba",
+        "relative_position": [3.5, 0.1]
+    },
+    "26": {
+        "name": "Pipe",
+        "relative_position": [3.7, 0.1],
+        "has_piranha": true
+    },
+    "27": {
+        "name": "Ground",
+        "relative_position": [4.1, 0],
+        "relative_width": 2
+    }
+}

@@ -7,7 +7,7 @@ KivyMD is used so that the app looks better.
 Asset credit: https://github.com/maheshkurmi/-Android-Super-Mario/Assets
 """
 
-
+# Set minimun window size
 from kivy.config import Config
 Config.set("graphics", "minimum_height", "200")
 Config.set("graphics", "minimum_width", "200")
@@ -15,8 +15,6 @@ Config.set("graphics", "minimum_width", "200")
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
-
-Window.minimum_height = 100
 
 
 class SuperMarioApp(MDApp):
@@ -28,7 +26,6 @@ class SuperMarioApp(MDApp):
 
         Apply the settings related to the game that depend on window size.
         """
-        from kivy.core.window import Window
         Window.bind(size=self.win_size_changed)
         Window.bind(on_key_down=self.on_key_down)
         Window.bind(on_key_up=self.on_key_up)

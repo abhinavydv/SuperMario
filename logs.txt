@@ -1,0 +1,1 @@
+[True, ['left', 'bottom'], 'left']

@@ -33,7 +33,7 @@ class HomeScreen(Screen):
 
         lvl_screen = LevelScreen()
         self.manager.add_widget(lvl_screen)
-        lvl_screen.load("levels/level0.json")
+        lvl_screen.load("levels/level1.json")
         self.manager.transition.direction = "left"
         self.manager.current = "LevelScreen"
 

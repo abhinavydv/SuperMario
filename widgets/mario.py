@@ -7,7 +7,6 @@ from kivy.core.window import Window
 
 from widgets.walker import Walker
 from time import time
-from PIL import Image
 
 
 class Mario(Walker):
@@ -86,6 +85,7 @@ class Mario(Walker):
             self.invincible_time += dt
             if self.invincible_time > self.max_invincible_time:
                 self.is_invincible = False
+                self.opacity = 1
 
         relative_half = Window.width / Window.height / 2
         if self.position[0] > Window.width/2 and levelscreen.right_most_sprite.right > Window.width:
@@ -149,6 +149,7 @@ class Mario(Walker):
     def be_invincible(self):
         self.is_invincible = True
         self.invincible_time = 0
+        self.opacity = 0.5
 
     def get_fire(self):
         if self.small:

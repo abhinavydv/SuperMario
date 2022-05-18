@@ -71,7 +71,6 @@ class Piranha(Periodic):
         if self.waiting:
             if self.mario_in_vicinity() and side == "bottom":
                 self.relative_velocity[1] = 0
-                self.waiting = True
                 self.t = time() + self.mario_wait_duration
             elif time() - self.t > self.wait_duration:
                 self.waiting = False
@@ -112,6 +111,8 @@ class Piranha(Periodic):
             self.mario_collided(other, col)
 
     def mario_collided(self, mario, col):
+        if self.waiting:
+            return
         if mario.is_invincible:
             self.die()
         else:

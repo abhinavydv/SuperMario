@@ -89,8 +89,9 @@ class Walker(DynamicSprite):
         if other.tag == "mario":
             self.mario_collided(other, col)
 
-        if other.is_static:
-            other.move_aside(self, col)
+        # if other.is_static:
+        #     other.move_aside(self, col)
+        other.move_aside(self, col)
 
     def jump(self, multiplier=1):
         levelscreen = self.parent.parent

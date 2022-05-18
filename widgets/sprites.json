@@ -10,7 +10,7 @@
     "Ground": {
         "class": "widgets.objects.Ground",
         "relative_height": 0.1,
-        "relative_width": 0.12,
+        "relative_width": 0.1,
         "relative_position": [0, 0]
     },
     "OrangeBrick": {
